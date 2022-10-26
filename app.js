@@ -29,11 +29,7 @@ app.set('views', path.join(__dirname, 'views'));
 //Serving static files
 app.use(express.static(`${__dirname}/public`));
 
-app.use(
-	cors({
-		origin: '*'
-	})
-);
+app.use(cors());
 app.options('*', cors());
 //Set security HTTP headers
 // app.use(helmet());
