@@ -1,8 +1,7 @@
 const AppError = require('../utils/appErrors');
 const handleCastErrorDB = (err) => {
-	// const message = `Invalid ${err.path}: ${err.value}.`;
-	const message = err;
-
+	const message = `Invalid ${err.path}: ${err.value}.`;
+	// const message = err;
 	return new AppError(message, 400);
 };
 const handleDuplicateFieldsDB = (err) => {
@@ -40,17 +39,9 @@ const sendProductionError = (err, req, res) => {
 	if (req.originalUrl.startsWith('/api')) {
 		// Operational, trusted error: send message to client
 		if (err.isOperational) {
-			// return res.status(err.statusCode).json({
-			// 	status: err.status,
-			// 	message: err.message
-			// });
-
 			return res.status(err.statusCode).json({
-				// remove this
 				status: err.status,
-				error: err,
-				message: err.message,
-				stack: err.stack
+				message: err.message
 			});
 			// Programming or other unknown error: don't leak error details
 		}
