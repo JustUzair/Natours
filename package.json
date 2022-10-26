@@ -2,10 +2,10 @@
 	"name": "natours",
 	"version": "1.0.0",
 	"description": "learning node",
-	"source": "public/js/index.js",
-	"main": "public/js/bundle.js",
+	"main": "app.js",
 	"scripts": {
-		"start": "nodemon server.js",
+		"start": "node server.js",
+		"dev": "nodemon server.js",
 		"start:prod": "SET NODE_ENV=production&& nodemon server.js",
 		"watch": "parcel watch ./public/js/index.js --public-url /public --no-source-maps"
 	},
@@ -38,5 +38,8 @@
 		"stripe": "^10.15.0",
 		"validator": "^13.7.0",
 		"xss-clean": "^0.1.1"
+	},
+	"engines": {
+		"node": ">=16.0.0"
 	}
 }
