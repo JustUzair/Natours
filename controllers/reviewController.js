@@ -12,7 +12,6 @@ exports.setTourUserIds = (req, res, next) => {
 };
 
 exports.checkBooking = catchAsync(async (req, res, next) => {
-	console.log(req.body.tour);
 	const bookings = await Booking.find({
 		user: req.user.id,
 		tour: req.body.tour

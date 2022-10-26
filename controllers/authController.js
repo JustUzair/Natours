@@ -50,7 +50,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 	if (process.env.NODE_ENV === 'production') {
 		url = `${req.protocol}://${req.get('host')}/me`;
 	}
-	console.log(url);
+	// console.log(url);
 	await new Email(newUser, url).sendWelcome();
 	createAndSendToken(newUser, 201, res);
 });

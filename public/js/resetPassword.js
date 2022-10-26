@@ -2,7 +2,7 @@ const resetPassword = async (password, passwordConfirm, resetToken) => {
 	try {
 		const res = await axios({
 			method: 'PATCH',
-			url: `http://127.0.0.1:3000/api/v1/users/resetPassword/${resetToken}`,
+			url: `/api/v1/users/resetPassword/${resetToken}`,
 			data: {
 				password,
 				passwordConfirm
@@ -18,7 +18,7 @@ const resetPassword = async (password, passwordConfirm, resetToken) => {
 		// console.log(res);
 	} catch (err) {
 		showAlert('error', err.response.data.message);
-		console.log(err.response.data.message);
+		// console.log(err.response.data.message);
 	}
 };
 

@@ -8,7 +8,7 @@ const $1b2fe58f3cd66eca$export$596d806903d1f59e = async (email, password) => {
 	try {
 		const res = await (0, $parcel$interopDefault($8IomY$axios))({
 			method: 'POST',
-			url: 'http://127.0.0.1:3000/api/v1/users/login',
+			url: '/api/v1/users/login',
 			data: {
 				email: email,
 				password: password

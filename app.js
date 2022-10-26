@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const compression = require('compression');
 
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -90,10 +91,7 @@ app.use(
 		]
 	})
 );
-// app.use((req, res, next) => {
-// 	console.log(req.cookies);
-// 	next();
-// });
+app.use(compression());
 
 //All the routes above can be bind into one using express.Router() middleware
 // ------------Multiple Routers
