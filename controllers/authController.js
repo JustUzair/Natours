@@ -19,8 +19,7 @@ const createAndSendToken = (user, statusCode, res) => {
 		expires: new Date(
 			Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
 		),
-		httpOnly: true,
-		secure: req.secure || req.headers['x-forwarded-proto'] === 'https'
+		httpOnly: true
 	};
 	if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
@@ -39,14 +38,14 @@ const createAndSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-	// const newUser = await User.create({
-	// 	name: req.body.name,
-	// 	email: req.body.email,
-	// 	password: req.body.password,
-	// 	passwordConfirm: req.body.passwordConfirm,
-	// 	role: req.body.role
-	// });
-	const newUser = await User.create(req.body);
+	const newUser = await User.create({
+		name: req.body.name,
+		email: req.body.email,
+		password: req.body.password,
+		passwordConfirm: req.body.passwordConfirm,
+		role: req.body.role
+	});
+
 	const url = `${req.protocol}://127.0.0.1:3000/me`;
 	if (process.env.NODE_ENV === 'production') {
 		url = `${req.protocol}://${req.get('host')}/me`;
