@@ -19,7 +19,7 @@ const signup = async (name, email, password, passwordConfirm) => {
 		}
 	} catch (err) {
 		showAlert('error', err?.response?.data?.message);
-		// console.log(err?.response?.data?.message);
+		console.log(err);
 	}
 };
 
