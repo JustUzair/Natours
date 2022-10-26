@@ -45,21 +45,14 @@ exports.signup = catchAsync(async (req, res, next) => {
 	// 	passwordConfirm: req.body.passwordConfirm
 	// });
 	const newUser = await User.create(req.body);
-	const url = `${req.protocol}://127.0.0.1:3000/me`;
+	let url = `${req.protocol}://127.0.0.1:3000/me`;
 	if (process.env.NODE_ENV === 'production') {
-		url = `https://natours-uzair.herokuapp.com/me`;
+		url = `${req.protocol}://${req.get('host')}/me`;
 	}
 	// console.log(url);
 	await new Email(newUser, url).sendWelcome();
 	createAndSendToken(newUser, 201, req, res);
 });
-
-// exports.showErrorSignup = (req,res,next){
-//     res.send(200).json({
-//         status:'success',
-//         params:req.params
-//     })
-// }
 
 exports.login = catchAsync(async (req, res, next) => {
 	const { email, password } = req.body;

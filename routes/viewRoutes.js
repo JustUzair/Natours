@@ -4,7 +4,7 @@ const viewController = require('../controllers/viewController');
 const authController = require('../controllers/authController');
 const bookingController = require('../controllers/bookingController');
 // router.use(authController.isLoggedIn);
-router.get('/signup', viewController.getSignUpForm);
+router.get('/signup', authController.isLoggedIn, viewController.getSignUpForm);
 router.get(
 	'/',
 	bookingController.createBookingCheckout,
@@ -30,5 +30,3 @@ router.post(
 	viewController.updateUserData
 );
 module.exports = router;
-
-// "sharp": "^0.31.1",
