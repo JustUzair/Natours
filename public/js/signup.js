@@ -1,33 +1,3 @@
-// const signup = async (email, name, password, passwordConfirm) => {
-// 	try {
-// 		const res = await axios({
-// 			method: 'POST',
-// 			url: '/api/v1/users/signup',
-// 			data: {
-// 				email,
-// 				name,
-// 				password,
-// 				passwordConfirm,
-// 				role: 'user'
-// 			}
-// 		});
-
-// 		if (res.data.status === 'success') {
-// 			showAlert(
-// 				'success',
-// 				'Your registration is successful\nAn email has been sent to your registered account'
-// 			);
-// 			window.setTimeout(() => {
-// 				location.assign('/');
-// 			}, 5000);
-// 		}
-// 		// console.log(res);
-// 	} catch (err) {
-// 		showAlert('error', err.response.data.message);
-// 		// console.log(err.response.data.message);
-// 	}
-// };
-
 const signup = async (name, email, password, passwordConfirm) => {
 	try {
 		const res = await axios({
