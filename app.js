@@ -25,12 +25,11 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // Middleware
-
+app.use(cors());
+app.options('*', cors());
 //Serving static files
 app.use(express.static(`${__dirname}/public`));
 
-app.use(cors());
-app.options('*', cors());
 //Set security HTTP headers
 // app.use(helmet());
 // app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
