@@ -47,7 +47,7 @@ exports.signup = catchAsync(async (req, res, next) => {
 
 	const url = `${req.protocol}://127.0.0.1:3000/me`;
 	if (process.env.NODE_ENV === 'production') {
-		url = `${req.protocol}://${req.get('host')}/me`;
+		url = `https://natours-uzair.herokuapp.com/me`;
 	}
 	// console.log(url);
 	await new Email(newUser, url).sendWelcome();
