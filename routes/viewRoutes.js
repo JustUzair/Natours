@@ -4,7 +4,7 @@ const viewController = require('../controllers/viewController');
 const authController = require('../controllers/authController');
 const bookingController = require('../controllers/bookingController');
 // router.use(authController.isLoggedIn);
-
+router.get('/signup', viewController.getSignUpForm);
 router.get(
 	'/',
 	bookingController.createBookingCheckout,
@@ -13,7 +13,6 @@ router.get(
 );
 router.get('/tour/:slug', authController.isLoggedIn, viewController.getTour);
 router.get('/login', authController.isLoggedIn, viewController.getLoginForm);
-router.get('/signup', viewController.getSignUpForm);
 router.get(
 	'/my-bookings',
 	authController.protect,
