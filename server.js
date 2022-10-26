@@ -38,6 +38,7 @@ process.on('unhandledRejection', (err) => {
 });
 
 process.on('SIGTERM', () => {
+	// SIGTERM - signal fired when Heroku dynos restart
 	console.log('SIGTERM RECEIVED! Shutting Down gracefully!');
 	server.close(() => {
 		console.log('Process Terminated');
