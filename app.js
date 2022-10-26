@@ -43,7 +43,7 @@ app.use(
 		contentSecurityPolicy: {
 			directives: {
 				defaultSrc: ['*'],
-				scriptSrc: ["* data: 'unsafe-eval' blob:"]
+				scriptSrc: ["* data: 'unsafe-eval' 'unsafe-inline' blob:"]
 			}
 		}
 	})
