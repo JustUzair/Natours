@@ -7,7 +7,8 @@ const signup = async (email, name, password, passwordConfirm) => {
 				email,
 				name,
 				password,
-				passwordConfirm
+				passwordConfirm,
+				role: 'user'
 			}
 		});
 
