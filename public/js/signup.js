@@ -1,30 +1,55 @@
-const signup = async (email, name, password, passwordConfirm) => {
+// const signup = async (email, name, password, passwordConfirm) => {
+// 	try {
+// 		const res = await axios({
+// 			method: 'POST',
+// 			url: '/api/v1/users/signup',
+// 			data: {
+// 				email,
+// 				name,
+// 				password,
+// 				passwordConfirm,
+// 				role: 'user'
+// 			}
+// 		});
+
+// 		if (res.data.status === 'success') {
+// 			showAlert(
+// 				'success',
+// 				'Your registration is successful\nAn email has been sent to your registered account'
+// 			);
+// 			window.setTimeout(() => {
+// 				location.assign('/');
+// 			}, 5000);
+// 		}
+// 		// console.log(res);
+// 	} catch (err) {
+// 		showAlert('error', err.response.data.message);
+// 		// console.log(err.response.data.message);
+// 	}
+// };
+
+const signup = async (name, email, password, passwordConfirm) => {
 	try {
 		const res = await axios({
 			method: 'POST',
 			url: '/api/v1/users/signup',
 			data: {
-				email,
 				name,
+				email,
 				password,
-				passwordConfirm,
-				role: 'user'
+				passwordConfirm
 			}
 		});
 
 		if (res.data.status === 'success') {
-			showAlert(
-				'success',
-				'Your registration is successful\nAn email has been sent to your registered account'
-			);
+			showAlert('success', 'Signed up successfully');
 			window.setTimeout(() => {
 				location.assign('/');
-			}, 5000);
+			}, 3500);
 		}
-		// console.log(res);
 	} catch (err) {
-		showAlert('error', err.response.data.message);
-		// console.log(err.response.data.message);
+		showAlert('error', err?.response?.data?.message);
+		// console.log(err?.response?.data?.message);
 	}
 };
 
@@ -43,7 +68,7 @@ document
 		if (password != passwordConfirm)
 			showAlert('error', 'Password and Confirm Password should be same!');
 		else {
-			await signup(email, name, password, passwordConfirm);
+			await signup(name, email, password, passwordConfirm);
 		}
 		document.querySelector('.btn--signup').innerHTML = 'Create Account';
 	});
