@@ -9,7 +9,7 @@ module.exports = class Email {
 			(this.from = `Uzair Saiyed <${process.env.EMAIL_FROM}>`);
 	}
 	newTransport() {
-		if (process.env.NODE_ENV.trim() === 'production') {
+		if (process.env.NODE_ENV === 'production') {
 			return nodemailer.createTransport({
 				service: 'SendGrid',
 				auth: {
