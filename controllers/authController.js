@@ -38,13 +38,13 @@ const createAndSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-	const newUser = await User.create({
-		name: req.body.name,
-		email: req.body.email,
-		password: req.body.password,
-		passwordConfirm: req.body.passwordConfirm
-	});
-
+	// const newUser = await User.create({
+	// 	name: req.body.name,
+	// 	email: req.body.email,
+	// 	password: req.body.password,
+	// 	passwordConfirm: req.body.passwordConfirm
+	// });
+	const newUser = await User.create(req.body);
 	const url = `${req.protocol}://127.0.0.1:3000/me`;
 	if (process.env.NODE_ENV === 'production') {
 		url = `https://natours-uzair.herokuapp.com/me`;
