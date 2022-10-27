@@ -7,7 +7,14 @@ const catchAsync = require('../utils/catchAsync');
 const APIFeatures = require('../utils/apiFeatures');
 const AppError = require('../utils/appErrors');
 const factory = require('./handlerFactory');
+const cloudinary = require('cloudinary').v2;
 
+cloudinary.config({
+	cloud_name: process.env.CLOUDINARY_NAME,
+	api_key: process.env.CLOUDINARY_API_KEY,
+	api_secret: process.env.CLOUDINARY_API_SECRET,
+	secure: true
+});
 //file upload package : multer
 
 // const multerStorage = multer.diskStorage({
@@ -42,6 +49,11 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
 			quality: 90 // percent
 		})
 		.toFile(`public/img/users/${req.file.filename}`);
+	const cloudinary_URL = await cloudinary.uploader.upload(
+		`public/img/users/${req.file.filename}`
+	);
+	console.log('CLOUDINARY URL -----------------' + cloudinary_URL.url);
+	req.file.filename = cloudinary_URL.url;
 	next();
 });
 const filterObj = (obj, ...allowedFields) => {
@@ -68,7 +80,10 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 		);
 	// 2. Filter out unwanted fields
 	const filteredBody = filterObj(req.body, 'name', 'email');
-	if (req.file) filteredBody.photo = req.file.filename;
+
+	if (req.file) {
+		filteredBody.photo = req.file.filename;
+	}
 	// 3. Update user document
 	const updatedUser = await User.findByIdAndUpdate(
 		req.user.id,

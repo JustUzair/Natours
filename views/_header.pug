@@ -10,6 +10,6 @@ header.header
             a.nav__el.nav__el--cta(href=`/signup`) Sign Up
         else 
             a.nav__el(href='/me')
-                img.nav__user-img(src=`/img/users/${user.photo}` alt=`${user.name.split(' ')[0]}`)
+                img.nav__user-img(src=user.photo crossorigin='anonymous' alt=`${user.name.split(' ')[0]}`)
                 span= user.name.split(' ')[0]
             a.nav__el.nav__el--logout Log out
