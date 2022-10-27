@@ -18,6 +18,8 @@ const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 
+const bookingController = require('./controllers/bookingController');
+
 const globalErrorHandler = require('./controllers/errorController');
 const app = express();
 app.enable('trust proxy');
@@ -60,7 +62,13 @@ const limiter = rateLimit({
 	message: 'Too many requests from this IP, please try again in an hour'
 });
 app.use('/api', limiter); // all the routes that starts with  /api will have the rate limiting.
-
+app.post(
+	'/webhook-checkout',
+	express.raw({
+		type: 'application/json'
+	}),
+	bookingController.webhookCheckout
+);
 //Body Parser, reads data from body into req.body
 app.use(
 	express.json({

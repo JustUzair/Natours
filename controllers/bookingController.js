@@ -1,4 +1,5 @@
 const Tour = require('./../models/tourModel');
+const User = require('./../models/userModel');
 const Booking = require('./../models/bookingModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appErrors');
@@ -24,9 +25,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 				process.env.NODE_ENV === 'production'
 					? req.get('host')
 					: '127.0.0.1:3000'
-			}/?tour=${req.params.tourId}&user=${req.user.id}&price=${
-				tour.price
-			}`,
+			}/my-bookings`,
 			cancel_url: `${req.protocol}://${
 				process.env.NODE_ENV === 'production'
 					? req.get('host')
@@ -59,14 +58,37 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 	}
 });
 
-exports.createBookingCheckout = catchAsync(async (req, res, next) => {
-	// This is only TEMPORARY, because it's UNSECURE: everyone can make bookings without paying
-	const { tour, user, price } = req.query;
-
-	if (!(tour && user && price)) return next();
+const createBookingCheckout = async (session) => {
+	const tour = session.client_reference_id;
+	const user = (await User.findOne({ email: session.customer_email })).id;
+	let currencyConverter = new CC({
+		from: 'INR',
+		to: 'USD',
+		amount: tour.price
+		// isDecimalComma: true
+	});
+	const price = session.line_items[0].amount / 100;
+	let payableINRToUSD = await currencyConverter.convert();
 	await Booking.create({ tour, user, price });
-
-	res.redirect(req.originalUrl.split('?')[0]);
+};
+exports.webhookCheckout = catchAsync(async (req, res, next) => {
+	const signature = req.headers['stripe-signature'];
+	let event;
+	try {
+		event = stripe.webhooks.constructEvent(
+			req.body,
+			signature,
+			process.env.STRIPE_WEBHOOK_SECRET
+		);
+	} catch (err) {
+		return res.status(400).send(`Webhook Error : ${err.message}`);
+	}
+	if (event.type === 'checkout.session.complete') {
+		createBookingCheckout(event.data.object);
+	}
+	res.status(200).json({
+		received: true
+	});
 });
 
 exports.createBooking = factory.createOne(Booking);
