@@ -64,20 +64,22 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 
 const createBookingCheckout = async (session) => {
 	const tour = session.client_reference_id;
-	const user = (await User.findOne({ email: session.customer_email })).id;
+	const user = (await User.findOne({ email: session.customer_email }))._id;
+	const price = session.amount_total / 100;
 	let currencyConverter = new CC({
 		from: 'INR',
 		to: 'USD',
 		amount: tour.price
 		// isDecimalComma: true
 	});
-	const price = session.amount_total / 100;
+
 	let payableINRToUSD = await currencyConverter.convert();
 	await Booking.create({ tour, user, payableINRToUSD });
 };
 
-exports.webhookCheckout = catchAsync(async (req, res, next) => {
+exports.webhookCheckout = (req, res, next) => {
 	const signature = req.headers['stripe-signature'];
+
 	let event;
 	try {
 		event = stripe.webhooks.constructEvent(
@@ -86,15 +88,14 @@ exports.webhookCheckout = catchAsync(async (req, res, next) => {
 			process.env.STRIPE_WEBHOOK_SECRET
 		);
 	} catch (err) {
-		return res.status(400).send(`Webhook Error : ${err.message}`);
+		return res.status(400).send(`Webhook error: ${err.message}`);
 	}
-	if (event.type === 'checkout.session.completed') {
+
+	if (event.type === 'checkout.session.completed')
 		createBookingCheckout(event.data.object);
-	}
-	res.status(200).json({
-		received: true
-	});
-});
+
+	res.status(200).json({ received: true });
+};
 
 exports.createBooking = factory.createOne(Booking);
 exports.getBooking = factory.getOne(Booking);

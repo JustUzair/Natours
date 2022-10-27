@@ -64,9 +64,7 @@ const limiter = rateLimit({
 app.use('/api', limiter); // all the routes that starts with  /api will have the rate limiting.
 app.post(
 	'/webhook-checkout',
-	express.raw({
-		type: 'application/json'
-	}),
+	express.raw({ type: 'application/json' }),
 	bookingController.webhookCheckout
 );
 //Body Parser, reads data from body into req.body
