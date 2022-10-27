@@ -34,6 +34,7 @@ app.use(express.static(`${__dirname}/public`));
 // app.use(helmet());
 // app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 
+//minor-fixes to allow image-url from other sources i.e cloudinary
 app.use(
 	helmet({
 		crossOriginEmbedderPolicy: false,

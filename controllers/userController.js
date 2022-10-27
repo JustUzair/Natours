@@ -37,6 +37,8 @@ const multerFilter = (req, file, cb) => {
 };
 const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
 exports.uploadUserPhoto = upload.single('photo');
+
+//minor-fixes to allow image-url from other sources i.e cloudinary
 exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
 	if (!req.file) return next();
 
@@ -52,7 +54,7 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
 	const cloudinary_URL = await cloudinary.uploader.upload(
 		`public/img/users/${req.file.filename}`
 	);
-	console.log('CLOUDINARY URL -----------------' + cloudinary_URL.url);
+	// console.log('CLOUDINARY URL -----------------' + cloudinary_URL.url);
 	req.file.filename = cloudinary_URL.url;
 	next();
 });
