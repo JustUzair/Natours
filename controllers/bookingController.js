@@ -38,7 +38,11 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 					name: `${tour.name} Tour`,
 					description: tour.summary,
 					images: [
-						`https://www.natours.dev/img/tours/${tour.imageCover}`
+						`${req.protocol}://${
+							process.env.NODE_ENV === 'production'
+								? req.get('host')
+								: '127.0.0.1:3000'
+						}/img/tours/${tour.imageCover}`
 					],
 					amount: payableAmount * 100,
 					currency: 'inr',
@@ -67,10 +71,11 @@ const createBookingCheckout = async (session) => {
 		amount: tour.price
 		// isDecimalComma: true
 	});
-	const price = session.line_items[0].amount / 100;
+	const price = session.display_items[0].amount / 100;
 	let payableINRToUSD = await currencyConverter.convert();
 	await Booking.create({ tour, user, price });
 };
+
 exports.webhookCheckout = catchAsync(async (req, res, next) => {
 	const signature = req.headers['stripe-signature'];
 	let event;
@@ -83,7 +88,7 @@ exports.webhookCheckout = catchAsync(async (req, res, next) => {
 	} catch (err) {
 		return res.status(400).send(`Webhook Error : ${err.message}`);
 	}
-	if (event.type === 'checkout.session.complete') {
+	if (event.type === 'checkout.session.completed') {
 		createBookingCheckout(event.data.object);
 	}
 	res.status(200).json({
