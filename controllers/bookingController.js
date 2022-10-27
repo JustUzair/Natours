@@ -25,7 +25,7 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 				process.env.NODE_ENV === 'production'
 					? req.get('host')
 					: '127.0.0.1:3000'
-			}/my-bookings`,
+			}/my-bookings?alert=booking`,
 			cancel_url: `${req.protocol}://${
 				process.env.NODE_ENV === 'production'
 					? req.get('host')

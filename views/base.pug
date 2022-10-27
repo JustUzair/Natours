@@ -11,7 +11,7 @@ html
             title Natours | #{title}
             
             
-    body
+    body(data-alert=`${alert ? alert : '' }`)
         // Header
         include _header
         
@@ -25,6 +25,10 @@ html
     script(src=`/js/signup.js` defer)
     script(src=`/js/resetPassword.js` defer)
     script(src=`/js/forgotPassword.js` defer)
+    script(src=`/js/alerts.js` defer)
+    script(src=`/js/serverAlerts.js` defer)
+
+
 
     
 
