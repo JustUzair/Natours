@@ -71,9 +71,9 @@ const createBookingCheckout = async (session) => {
 		amount: tour.price
 		// isDecimalComma: true
 	});
-	const price = session.display_items[0].amount / 100;
+	const price = session.amount_total / 100;
 	let payableINRToUSD = await currencyConverter.convert();
-	await Booking.create({ tour, user, price });
+	await Booking.create({ tour, user, payableINRToUSD });
 };
 
 exports.webhookCheckout = catchAsync(async (req, res, next) => {
