@@ -1411,6 +1411,7 @@
 ::-webkit-scrollbar{
     width:10px;
     height: 10px;
+    
 }
 ::-webkit-scrollbar:horizontal
 {background:rgba(0, 0, 0, 0.06) !important;}
@@ -1543,7 +1544,7 @@
         font-size: 2rem !important;
     }
     .form__group button {
-        font-size: 2rem !important;
+        font-size: 1.8rem !important;
     }
     a.forgot-password-link {
         font-size: 2rem;
