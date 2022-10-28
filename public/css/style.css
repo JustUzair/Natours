@@ -1431,7 +1431,7 @@
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 820px) {
     body{
         padding:0;
     }
@@ -1442,6 +1442,10 @@
     }
     .nav--tours, .header__logo{
         margin-bottom: 0 !important;
+    }
+    img.nav__user-img {
+        height: 5rem;
+        width: 5rem;
     }
     .card-container{
         display: flex;
@@ -1525,6 +1529,7 @@
     }
     .form__input{
         font-size:2rem !important;
+        margin-bottom: 2rem;
     }
     .form__upload + label{
         font-size:2.2rem;
@@ -1533,8 +1538,15 @@
         height: 10rem;
         width: 10rem;
     }
-    button.user__update--btn,button.btn--save-password {
+    button.user__update--btn,button.btn--save-password{
         margin-top: 2rem;
         font-size: 2rem !important;
     }
+    .form__group button {
+        font-size: 2rem !important;
+    }
+    a.forgot-password-link {
+        font-size: 2rem;
+    }
+    
   }
