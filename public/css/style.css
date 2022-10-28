@@ -1430,3 +1430,111 @@
 }
 
 
+
+@media (max-width: 768px) {
+    body{
+        padding:0;
+    }
+    .header{
+        display:flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    .nav--tours, .header__logo{
+        margin-bottom: 0 !important;
+    }
+    .card-container{
+        display: flex;
+        flex-direction: column;
+        max-width: 60vw;
+    }
+    .card{
+        min-height: 60vh;
+    }
+    .card__details{
+        margin-top: 20px;
+    }
+    .heading-tertirary {
+        font-size: 3.5rem;
+    }
+    .card__picture{
+        height:auto;
+    }
+    .card__sub-heading {
+        font-size: 1.8rem;
+    }
+    .card__text{
+        font-size: 2rem;
+    }
+    .card__data{
+        font-size: 2rem;
+    }
+    .card__footer-value{
+        font-size:2rem;
+    }
+    .card__footer-text{
+        font-size:1.8rem;
+    }
+    .card .btn {
+        font-size: 2rem !important;
+    }
+
+    .nav__el, .nav__el:link, .nav__el:visited{
+        font-size: 2rem;
+    }
+    .section-header {
+        height: auto;
+    }
+    .heading-box__detail{
+        font-size: 3rem !important;
+        font-weight: 200;
+    }
+    .overview-box__text{
+        font-size:1.7rem;
+    }
+    .description-box .description__text {
+        font-size: 2rem;
+    }
+    p.reviews__text {
+        font-size: 1.9rem;
+        max-width: 25rem;
+    }
+    svg.reviews__star {
+        height: 2.8rem;
+        width: 2.8rem;
+    }
+    .cta__text {
+        font-size: 2.4rem;
+        font-weight: 400;
+    }
+    button.btn.btn--green.span-all-rows {
+        margin-top: 2rem;
+        font-size: 2.2rem;
+    }
+    img.overview-box__img {
+        height: 5.5rem;
+    }
+    nav.user-view__menu {
+        flex: none;
+    }
+    .side-nav li a{
+        font-size:1.8rem !important;
+    }
+    .user--main{
+        padding:0;
+    }
+    .form__input{
+        font-size:2rem !important;
+    }
+    .form__upload + label{
+        font-size:2.2rem;
+    }
+    .form__user-photo {
+        height: 10rem;
+        width: 10rem;
+    }
+    button.user__update--btn,button.btn--save-password {
+        margin-top: 2rem;
+        font-size: 2rem !important;
+    }
+  }
