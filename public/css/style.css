@@ -1625,7 +1625,7 @@
     }    
     .nav__el--cta {
         padding: 1rem 1rem;
-        border-radius: 10rem;
+        border-radius: 5px;
         border: 1px solid currentColor !important;
         transition: all 0.3s;
         justify-content: space-between;
@@ -1811,6 +1811,7 @@
     .user-view__content{
         padding: 2rem 0;
     }
+    
 }  
 
 
