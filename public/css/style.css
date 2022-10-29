@@ -1787,6 +1787,7 @@
     }
     .footer{
         padding:0;
+        padding-top:5rem;
     }
     .footer__nav {
         display: inline-flex;
@@ -1806,6 +1807,9 @@
         font-size: 1.8rem;
         width: 100vw;
         padding: 2rem;
+    }
+    .user-view__content{
+        padding: 2rem 0;
     }
 }  
 
