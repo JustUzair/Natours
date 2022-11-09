@@ -8,7 +8,6 @@ You can do the following actions on the Natours website:
 -   upload your photo
 -   update passwords and emails
 -   book a tour with stripe(fake transaction)
--   get an email after sign up by mukhammadalime@gmail.com
 
 I added following additional features to the project:
 
